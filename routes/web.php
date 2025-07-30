@@ -5,7 +5,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UpdateProfileController;
 use App\Http\Controllers\Auth\ChangePasswordController;
-
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgetPasswordController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,6 +28,15 @@ Route::middleware('guest')->group(function () {
         Route::post('register', 'register')->name('register');
     });
 
+    Route::controller(ForgetPasswordController::class)->group(function () {
+        Route::get('forget-password', 'showForgetPasswordForm')->name('forget-password.email');
+        Route::post('forget-password', 'sendResetLink')->name('forget-password.submit');
+    });
+
+    Route::controller(ResetPasswordController::class)->group(function () {
+        Route::get('reset-password/{token}/{email}', 'showResetPasswordForm')->name('show-reset-password-form');
+        Route::post('reset-password', 'resetPassword')->name('reset-password.submit');
+    });
 });
 
 

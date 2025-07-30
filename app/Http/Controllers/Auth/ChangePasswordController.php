@@ -12,11 +12,13 @@ class ChangePasswordController extends Controller
 {
     public function changePassword(ChangePasswordRequest $request)
     {
+
         $user = Auth::user();
+
         if (Hash::check($request->current_password, $user->password)) {
-            $user->update([
-                'password' => Hash::make($request->new_password)
-            ]);
+
+            $user->update(['password' => Hash::make($request->new_password)]);
+
             return redirect()->back()->with('success', 'Password updated successfully.');
         }
 
