@@ -37,6 +37,8 @@ Route::middleware('guest')->group(function () {
         Route::get('reset-password/{token}/{email}', 'showResetPasswordForm')->name('show-reset-password-form');
         Route::post('reset-password', 'resetPassword')->name('reset-password.submit');
     });
+
+
 });
 
 

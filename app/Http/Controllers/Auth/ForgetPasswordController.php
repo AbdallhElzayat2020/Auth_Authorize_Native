@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ForgetPasswordRequest;
 use App\Mail\SendResetLinkMail;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,13 +20,8 @@ class ForgetPasswordController extends Controller
         return view('auth.forget-password');
     }
 
-    public function sendResetLink(Request $request)
+    public function sendResetLink(ForgetPasswordRequest $request)
     {
-
-        $request->validate([
-            'email' => ['required', 'email', 'exists:users,email', 'string', 'max:255'],
-        ]);
-
         $token = Str::random(64);
 
         DB::table('password_reset_tokens')->updateOrInsert(
