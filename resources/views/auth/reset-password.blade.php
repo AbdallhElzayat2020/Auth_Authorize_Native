@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
+    <title>Reset Password</title>
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
@@ -12,18 +12,24 @@
     <div class="bg-gray-800 rounded-lg shadow-md w-full max-w-md p-6">
         <h2 class="text-2xl font-semibold text-center mb-6">Reset Password</h2>
 
-        @if(session('error'))
-            <div class="bg-red-500 text-white p-4 rounded mb-4">
-                {{ session('error') }}
-            </div>
-        @endif
+        {{--        @if(session('error'))--}}
+        {{--            <div class="bg-red-500 text-white p-4 rounded mb-4">--}}
+        {{--                {{ session('error') }}--}}
+        {{--            </div>--}}
+        {{--        @endif--}}
+        @session('error')
+        <div class="text-red-500 text-sm mt-1">{{session("error")}}</div>
+        @enderror
         <form action="{{ route('reset-password.submit') }}" method="POST">
             @csrf
             <input type="hidden" name="token" value="{{$token}}">
             <div class="mb-4">
                 <label for="email" class="block text-gray-300">Email</label>
-                <input type="email" name="email"  value="{{old('email')}}" id="email" autocomplete="email" autofocus
+                <input type="email" name="email" value="{{old('email')}}" id="email" autocomplete="email" autofocus
                        class="w-full p-3 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                @error('email')
+                <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-4">

@@ -33,6 +33,9 @@ class ResetPasswordController extends Controller
             ->delete();
 
         $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return back()->with('error', 'Invalid Token or email address');
+        }
         $user->update(['password' => Hash::make($request->password)]);
 
         return redirect()->to("/login")->with("success", 'Password reset successfully, you can login now');
