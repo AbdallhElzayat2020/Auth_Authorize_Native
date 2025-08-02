@@ -9,17 +9,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
-class AuthGitHubController extends Controller
+class SocialAuthController extends Controller
 {
-    public function redirect()
+    public function redirect($provider)
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function callback(Request $request)
+    public function callback($provider)
     {
 
-        $googleUser = Socialite::driver('github')->stateless()->user();
+        $googleUser = Socialite::driver($provider)->stateless()->user();
 
         $user = User::firstOrCreate(
 

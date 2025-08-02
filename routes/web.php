@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -47,15 +48,13 @@ Route::middleware('guest')->group(function () {
         Route::post('verify-account', 'verifyAccount')->name('verify-account.submit');
     });
 
-    Route::get('auth/google/redirect', [AuthGoogleController::class, 'redirect'])->name('google-auth.redirect');
-    Route::get('auth/google/callback', [AuthGoogleController::class, 'callback'])->name('google-auth.callback');
 
+    /* ########################## Social Login Routes ########################## */
 
-    Route::get('auth/github/redirect', [AuthGitHubController::class, 'redirect'])->name('github-auth.redirect');
-    Route::get('auth/github/callback', [AuthGitHubController::class, 'callback'])->name('github-auth.callback');
-
-    Route::get('auth/facebook/redirect', [AuthFacebookController::class, 'redirect'])->name('facebook-auth.redirect');
-    Route::get('auth/facebook/callback', [AuthFacebookController::class, 'callback'])->name('facebook-auth.callback');
+    Route::controller(SocialAuthController::class)->prefix('auth')->group(function () {
+        Route::get('/{provider}/redirect', 'redirect')->name('social-auth.redirect');
+        Route::get('/{provider}/callback', 'callback')->name('social-auth.callback');
+    });
 });
 
 
