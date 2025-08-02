@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\UpdateProfileController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
+use App\Http\Controllers\Auth\VerifyAccountController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +39,10 @@ Route::middleware('guest')->group(function () {
         Route::post('reset-password', 'resetPassword')->name('reset-password.submit');
     });
 
+    Route::controller(VerifyAccountController::class)->group(function () {
+        Route::get('verify-account/{email}', 'showVerifyForm')->name('email-verify');
+        Route::post('verify-account', 'verifyAccount')->name('verify-account.submit');
+    });
 
 });
 
