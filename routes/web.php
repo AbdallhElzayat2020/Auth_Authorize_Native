@@ -8,6 +8,9 @@ use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\VerifyAccountController;
+use App\Http\Controllers\Auth\AuthGoogleController;
+use App\Http\Controllers\Auth\AuthGitHubController;
+use App\Http\Controllers\Auth\AuthFacebookController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,6 +47,15 @@ Route::middleware('guest')->group(function () {
         Route::post('verify-account', 'verifyAccount')->name('verify-account.submit');
     });
 
+    Route::get('auth/google/redirect', [AuthGoogleController::class, 'redirect'])->name('google-auth.redirect');
+    Route::get('auth/google/callback', [AuthGoogleController::class, 'callback'])->name('google-auth.callback');
+
+
+    Route::get('auth/github/redirect', [AuthGitHubController::class, 'redirect'])->name('github-auth.redirect');
+    Route::get('auth/github/callback', [AuthGitHubController::class, 'callback'])->name('github-auth.callback');
+
+    Route::get('auth/facebook/redirect', [AuthFacebookController::class, 'redirect'])->name('facebook-auth.redirect');
+    Route::get('auth/facebook/callback', [AuthFacebookController::class, 'callback'])->name('facebook-auth.callback');
 });
 
 
