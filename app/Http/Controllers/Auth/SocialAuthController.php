@@ -27,14 +27,18 @@ class SocialAuthController extends Controller
             return to_route('login')->with('error', 'Invalid social driver');
         }
 
-        $googleUser = Socialite::driver($provider)->stateless()->user();
+        try {
+            $socialUser = Socialite::driver($provider)->stateless()->user();
+        } catch (\Exception $exception) {
+            return to_route('login')->with('error', 'Failed to authenticate with');
+        }
 
         $user = User::firstOrCreate(
 
-            ['email' => $googleUser->getEmail()],
+            ['email' => $socialUser->getEmail()],
 
             [
-                'name' => $googleUser->getName(),
+                'name' => $socialUser->getName(),
                 'password' => Hash::make('12345678'),
                 'email_verified_at' => now(),
                 'otp' => rand(100000, 999999),
