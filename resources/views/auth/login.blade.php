@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          integrity="sha512-x..."
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 <body class="bg-gray-900 text-white flex items-center justify-center h-screen">
 <div class="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-lg">
@@ -34,12 +38,22 @@
             <span class="text-red-500 text-sm mt-1">{{$message}}</span>
             @enderror
         </div>
-        <p class="mt-4 text-sm">Forgot your passsword? <a href="{{route("forget-password.email")}}"
-                                                          class="text-blue-400 hover:underline">Reset now</a></p>
+        <p class="mt-4 text-sm">Forgot your passsword?
+            <a href="{{route("forget-password.email")}}" class="text-blue-400 hover:underline">
+                Reset now
+            </a>
+        </p>
         <button type="submit"
                 class="w-full py-3 mt-4 bg-blue-600 rounded-lg font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Login
         </button>
+
+        <p class="mt-4 text-sm">Login without password?
+            <a href="{{ route('password-less-login.show') }}" class="text-blue-400 hover:underline">
+                Login now
+            </a>
+        </p>
+
         <!-- Social Login Buttons Row -->
         <div class="flex justify-between mt-4">
             <!-- Google Login Button -->
@@ -63,6 +77,7 @@
                 Facebook
             </a>
         </div>
+
         <p class="mt-4 text-sm text-center">Don’t have an account?
             <a href="{{route("register")}}" class="text-blue-400 hover:underline">
                 Register

@@ -30,7 +30,7 @@ class SocialAuthController extends Controller
         try {
             $socialUser = Socialite::driver($provider)->stateless()->user();
         } catch (\Exception $exception) {
-            return to_route('login')->with('error', 'Failed to authenticate with');
+            return to_route('login')->with('error', 'Failed to authenticate');
         }
 
         $user = User::firstOrCreate(

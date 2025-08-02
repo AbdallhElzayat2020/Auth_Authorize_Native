@@ -9,9 +9,7 @@ use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\VerifyAccountController;
-use App\Http\Controllers\Auth\AuthGoogleController;
-use App\Http\Controllers\Auth\AuthGitHubController;
-use App\Http\Controllers\Auth\AuthFacebookController;
+use App\Http\Controllers\Auth\PasswordLessLoginController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,6 +52,15 @@ Route::middleware('guest')->group(function () {
     Route::controller(SocialAuthController::class)->prefix('auth')->group(function () {
         Route::get('/{provider}/redirect', 'redirect')->name('social-auth.redirect');
         Route::get('/{provider}/callback', 'callback')->name('social-auth.callback');
+    });
+
+
+    Route::controller(PasswordLessLoginController::class)->group(function () {
+        Route::get('password-less-login', 'showForm')->name('password-less-login.show');
+        Route::post('password-less-login', 'sendLink');
+        Route::get('password-less-login/{user}', 'loginHandler')
+            ->name('password-less-login.handler')
+            ->middleware('signed');
     });
 });
 
