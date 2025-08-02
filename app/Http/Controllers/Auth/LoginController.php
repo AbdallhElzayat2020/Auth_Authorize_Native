@@ -20,26 +20,30 @@ class LoginController extends Controller
 
     public function handleLogin(LoginRequest $request)
     {
-        $credentials = $request->only('email', 'password');
-        $user = User::whereEmail($request->email)->first();
 
-        if (!Hash::check($request->password, $user->password)) {
-            return redirect()->back()->with(['error' => 'Invalid credentials']);
+        $user = User::whereEmail($request->identifier)
+            ->orWhere('phone', $request->identifier)
+            ->first();
+
+        // or if you want to check both email and phone
+        //        $type = filter_var($request->input('identifier'), FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+        // $user = User::where($type, $request->identifier)->first();
+
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with(['error' => 'Invalid credentials'])->withInput($request->only('email'));
         }
 
-        if (!$user->email_verified_at) {
+        if (!$user->account_verified_at) {
 
             Mail::to($user->email)->send(new VerifyAccountMail($user->otp, $user->email));
 
-            return to_route('email-verify', $user->email)
+            return to_route('account-verify', $user->email)
                 ->with('error', 'Please verify your email address before logging in. A verification email has been sent to your email address.');
         }
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('profile')->with('success', 'Logged in successfully!');
-        }
-
-        return redirect()->back()->with(['error' => 'Invalid credentials'])->withInput($request->only('email'));
+        Auth::login($user);
+        return redirect()->intended(route('profile'))->with('success', 'Login successful');
 
     }
 

@@ -23,10 +23,10 @@
     <form action="{{url("login")}}" method="POST" class="space-y-4">
         @csrf
         <div>
-            <label for="email" class="block mb-2 text-sm font-medium">Email</label>
-            <input type="email" id="email" name="email" autocomplete="off" autofocus
+            <label for="identifier" class="block mb-2 text-sm font-medium">Email / Phone</label>
+            <input type="text" id="identifier" name="identifier" autofocus
                    class="w-full p-3 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            @error('email')
+            @error('identifier')
             <span class="text-red-500 text-sm mt-1">{{$message}}</span>
             @enderror
         </div>

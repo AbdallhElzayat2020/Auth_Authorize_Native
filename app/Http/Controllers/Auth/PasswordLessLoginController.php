@@ -18,11 +18,9 @@ class PasswordLessLoginController extends Controller
         return view('auth.passwordless-login');
     }
 
-
-    public function sendLink(PasswordLessRequest $request)
+    public function sendLink(PasswordLessRequest $request): \Illuminate\Http\RedirectResponse
     {
         $user = User::whereEmail($request->email)->first();
-
 
         $url = URL::temporarySignedRoute(
             'password-less-login.handler', now()->addMinutes(10), ['user' => $user->id]
@@ -34,7 +32,7 @@ class PasswordLessLoginController extends Controller
 
     }
 
-    public function loginHandler(User $user)
+    public function loginHandler(Request $request, User $user): \Illuminate\Http\RedirectResponse
     {
         Auth::login($user);
         return redirect()->intended('profile')->with('success', 'Logged in successfully!');

@@ -22,7 +22,7 @@ class VerifyAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email', 'string', 'exists:users,email'],
+            'identifier' => ['required', 'string', 'max:255'],
             'otp' => ['required', 'array', 'size:6'],
             'otp.*' => ['required', 'numeric', 'digits:1']
         ];

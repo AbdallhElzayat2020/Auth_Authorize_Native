@@ -20,6 +20,17 @@ Route::view('/', 'welcome');
 
 Route::middleware('guest')->group(function () {
 
+
+    /* ########################## Social Login Routes ########################## */
+
+    Route::controller(SocialAuthController::class)->prefix('auth')->group(function () {
+        Route::get('/{provider}/redirect', 'redirect')->name('social-auth.redirect');
+        Route::get('/{provider}/callback', 'callback')->name('social-auth.callback');
+    });
+
+
+    /* ########################## Manual Login Routes ########################## */
+
     Route::controller(LoginController::class)->group(function () {
         Route::get('login', 'showLoginForm')->name('login');
         Route::post('login', 'handleLogin')->name('login');
@@ -36,22 +47,20 @@ Route::middleware('guest')->group(function () {
         Route::post('forget-password', 'sendResetLink')->name('forget-password.submit');
     });
 
+    /* Reset Password */
     Route::controller(ResetPasswordController::class)->group(function () {
         Route::get('reset-password/{token}/{email}', 'showResetPasswordForm')->name('show-reset-password-form');
         Route::post('reset-password', 'resetPassword')->name('reset-password.submit');
     });
 
+
+    /*  Verify Account */
     Route::controller(VerifyAccountController::class)->group(function () {
-        Route::get('verify-account/{email}', 'showVerifyForm')->name('email-verify');
-        Route::post('verify-account', 'verifyAccount')->name('verify-account.submit');
-    });
+        Route::get('verify-account/{identifier}', 'showVerifyForm')->name('account-verify');
+        Route::post('verify-account', 'verifyOtp')->name('verify-account.submit');
 
-
-    /* ########################## Social Login Routes ########################## */
-
-    Route::controller(SocialAuthController::class)->prefix('auth')->group(function () {
-        Route::get('/{provider}/redirect', 'redirect')->name('social-auth.redirect');
-        Route::get('/{provider}/callback', 'callback')->name('social-auth.callback');
+        /* WhatsApp otp */
+        Route::post('send-verification-otp', 'SendOtp')->name('send-verification-otp');
     });
 
 

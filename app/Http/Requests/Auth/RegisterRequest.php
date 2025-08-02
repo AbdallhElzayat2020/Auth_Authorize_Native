@@ -18,8 +18,17 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+            'phone' => ['nullable', 'string', 'unique:users,phone', 'phone:AUTO'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'password_confirmation' => ['required', 'string', 'min:6'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'phone.phone' => 'The phone number must be a valid phone number.',
+            'phone.unique' => 'The phone number has already been taken.',
         ];
     }
 }

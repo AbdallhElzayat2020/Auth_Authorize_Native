@@ -16,14 +16,15 @@ class UpdateProfileController extends Controller
         if (!$user) {
             return redirect()->route('login')->with('error', 'You must be logged in to update your profile.');
         }
+
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
         ]);
         return redirect()->route('profile')->with('success', 'Profile updated successfully.');
 
     }
-
 
 
 }

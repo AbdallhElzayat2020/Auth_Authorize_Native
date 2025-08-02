@@ -52,4 +52,11 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT_URL', 'http://localhost:8000/auth/facebook/callback'),
     ],
 
+    /* send Verification OTP WhatsApp */
+    'whatsapp' => [
+        'access_token' => env('WHATSAPP_ACCESS_TOKEN'),
+        'phone_id' => env('WHATSAPP_PHONE_ID'),
+        'template_name' => env('WHATSAPP_TEMPLATE_NAME'),
+    ],
+
 ];

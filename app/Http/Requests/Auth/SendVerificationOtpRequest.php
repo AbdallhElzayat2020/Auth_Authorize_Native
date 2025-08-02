@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class SendVerificationOtpRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -16,8 +16,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'identifier' => ['required', 'max:100'],
-            'password' => ['required', 'min:8', 'string', 'max:255'],
+            'identifier' => ['required', 'string', 'max:255',],
+            'type' => ['required', 'string', 'in:email,phone'],
         ];
     }
 }

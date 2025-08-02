@@ -22,8 +22,10 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         $id = auth()->user()->id;
+
         return [
             'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $id],
+            'phone' => ['required', 'max:255', 'regex:/^01[0125][0-9]{8}$/', 'unique:users,phone,' . $id],
             'name' => ['required', 'string', 'max:255'],
         ];
     }
