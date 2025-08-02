@@ -13,11 +13,19 @@ class SocialAuthController extends Controller
 {
     public function redirect($provider)
     {
+        if (!in_array($provider, ['facebook', 'google', 'github'])) {
+            return to_route('login')->with('error', 'Invalid social driver');
+        }
+
+
         return Socialite::driver($provider)->redirect();
     }
 
     public function callback($provider)
     {
+        if (!in_array($provider, ['facebook', 'google', 'github'])) {
+            return to_route('login')->with('error', 'Invalid social driver');
+        }
 
         $googleUser = Socialite::driver($provider)->stateless()->user();
 

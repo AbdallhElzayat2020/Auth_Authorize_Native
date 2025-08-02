@@ -41,8 +41,6 @@
             Login
         </button>
         <!-- Social Login Buttons Row -->
-        <!-- Social Login Buttons Row -->
-        <!-- Social Login Buttons Row -->
         <div class="flex justify-between mt-4">
             <!-- Google Login Button -->
             <a href="{{ route('social-auth.redirect','google') }}"
