@@ -15,14 +15,15 @@ class ChangePasswordController extends Controller
 
         $user = Auth::user();
 
-        if (Hash::check($request->current_password, $user->password)) {
+        if (!Hash::check($request->current_password, $user->password)) {
 
-            $user->update(['password' => Hash::make($request->new_password)]);
-
-            return redirect()->back()->with('success', 'Password updated successfully.');
+            return redirect()->back()->with(['error' => 'The provided password does not match your current password.']);
         }
+        $user->update(['password' => Hash::make($request->new_password)]);
 
-        return redirect()->back()->with(['error' => 'The provided password does not match your current password.']);
+        Auth::login($user);
+
+        return redirect()->back()->with('success', 'Password updated successfully.');
 
     }
 }
