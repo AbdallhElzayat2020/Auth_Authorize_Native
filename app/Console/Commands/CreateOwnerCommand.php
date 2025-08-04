@@ -2,25 +2,32 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class CreateAdminCommand extends Command
+class CreateOwnerCommand extends Command
 {
 
-    protected $signature = 'create:admin';
+    protected $signature = 'create:owner';
 
-    protected $description = 'This command for create admin User';
+    protected $description = 'This command for create owner User';
 
 
     public function handle()
     {
-        $name = $this->ask('What is the name of the admin?');
-        $email = $this->ask('What is the email of the admin?');
-        $password = $this->ask('What is the password of the admin?');
-        $password_confirm = $this->ask('What is the password confirmation of the admin?');
+
+        if (Role::where('role', 'Owner')->first()) {
+            Artisan::call('db:seed', ['--class' => 'RoleAndPermissionSeeder']);
+        }
+
+        $name = $this->ask('What is the name of the owner?');
+        $email = $this->ask('What is the email of the owner?');
+        $password = $this->ask('What is the password of the owner?');
+        $password_confirm = $this->ask('What is the password confirmation of the owner?');
 
 
         $validator = Validator::make([
@@ -46,11 +53,14 @@ class CreateAdminCommand extends Command
         $user = User::create([
             'name' => $name,
             'email' => $email,
-            'role' => 'admin',
             'account_verified_at' => now(),
             'password' => Hash::make($password),
             'otp' => random_int(100000, 999999),
         ]);
-        $this->info('Admin ' . $name . 'created successfully!');
+
+        $ownerRole = Role::where('role', 'Owner')->first();
+        $user->roles()->attach($ownerRole->id);
+
+        $this->info('Owner ' . $name . ' created successfully!');
     }
 }
