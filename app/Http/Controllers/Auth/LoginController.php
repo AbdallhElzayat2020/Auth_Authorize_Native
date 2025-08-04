@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Mail\VerifyAccountMail;
+use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,5 +56,11 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect()->route('login')->with('success', 'Logged out successfully!');
+    }
+
+    public function logoutDevice(Request $request, Session $session): \Illuminate\Http\RedirectResponse
+    {
+        $session->delete();
+        return back()->with('success', 'Device logged out successfully');
     }
 }

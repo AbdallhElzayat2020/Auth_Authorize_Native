@@ -83,5 +83,6 @@ Route::middleware(['auth', 'verified', 'auth.session'])->group(function () {
     Route::put('update-profile', [UpdateProfileController::class, 'updateProfile'])->name('update-profile');
     Route::post('change-password', [ChangePasswordController::class, 'changePassword'])->name('change-password');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('logout/{session}', [LoginController::class, 'logoutDevice'])->name('logout_device');
 
 });
