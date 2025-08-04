@@ -76,9 +76,7 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-
 /* ########################## Protected Routes ########################## */
-
 
 /* Profile Routes */
 Route::middleware(['auth', 'auth.session'])->group(function () {
@@ -92,12 +90,18 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::post('logout/{session}', [LoginController::class, 'logoutDevice'])->name('logout-device');
 
 
-    Route::view('admin', 'pages.admin')->name('admin')->middleware('role:Admin');
-    Route::view('student', 'pages.student')->name('student')->middleware('role:Student');
-    Route::view('teacher', 'pages.teacher')->name('teacher')->middleware('role:Teacher');
+    Route::view('admin', 'pages.admin')->name('admin')->middleware('permission:admin_view');
+    Route::view('student', 'pages.student')->name('student')->middleware('permission:student_view');
+    Route::view('teacher', 'pages.teacher')->name('teacher')->middleware('permission:teacher_view');
 
 
-    Route::resource('roles', RolesController::class);
-    Route::get('users', [UsersController::class, 'index'])->name('users.index');
-    Route::get('users/{user}/change-role', [UsersController::class, 'changeRole'])->name('users.change-role');
+    Route::resource('roles', RolesController::class)
+        ->middleware('permission:view_roles');
+
+    Route::get('users', [UsersController::class, 'index'])->name('users.index')
+        ->middleware('permission:view_users');
+
+    Route::get('users/{user}/change-role', [UsersController::class, 'changeRole'])->name('users.change-role')
+        ->middleware('permission:change_user_roles');
+
 });

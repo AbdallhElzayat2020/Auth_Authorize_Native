@@ -52,6 +52,19 @@ class User extends Authenticatable
         ];
     }
 
+
+    public function permissions(): array
+    {
+        return $this->roles()->with('permissions')->get()
+            ->pluck('permissions')->flatten()->pluck('name')
+            ->unique()->toArray();
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        return in_array($permission, $this->permissions(), true);
+    }
+
     /* ==================== Relations ==================== */
 
     public function sessions(): HasMany
