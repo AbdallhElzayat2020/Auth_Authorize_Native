@@ -24,6 +24,7 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
             'otp' => random_int(100000, 999999),
         ]);

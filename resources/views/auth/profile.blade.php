@@ -118,8 +118,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="new_password_confirmation" class="block text-gray-300">Confirm New
-                        Password</label>
+                    <label for="new_password_confirmation" class="block text-gray-300">Confirm New Password</label>
                     <input type="password" name="new_password_confirmation" id="new_password_confirmation"
                            class="w-full p-3 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>

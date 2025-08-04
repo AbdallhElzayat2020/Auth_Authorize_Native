@@ -79,7 +79,7 @@ Route::middleware('guest')->group(function () {
 
 
 /* Profile Routes */
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'auth.session'])->group(function () {
 
     //    Route::view('profile', 'auth.profile')->name('profile');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
@@ -88,4 +88,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     //    Route::post('logout/{session}', [LoginController::class, 'logoutDevice'])->name('logout-device');
     Route::post('logout/{session}', [LoginController::class, 'logoutDevice'])->name('logout-device');
+
+
+    Route::view('admin', 'pages.admin')->name('admin')->middleware('role:admin');
+    Route::view('student', 'pages.student')->name('student')->middleware('role:student');
+    Route::view('teacher', 'pages.teacher')->name('teacher')->middleware('role:teacher');
+
+
 });
