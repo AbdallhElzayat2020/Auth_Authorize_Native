@@ -57,12 +57,13 @@
             </div>
         </div>
 
-        <button type="submit"
-                class="w-full py-3 mt-4 bg-blue-600 rounded-lg font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="submit" class="w-full py-3 mt-4 bg-blue-600 rounded-lg font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Register
         </button>
-        <p class="mt-4 text-sm text-center">Already have an account? <a href="{{route("login")}}"
-                                                                        class="text-blue-400 hover:underline">Login</a>
+        <p class="mt-4 text-sm text-center">Already have an account?
+            <a href="{{route("login")}}" class="text-blue-400 hover:underline">
+                Login
+            </a>
         </p>
     </form>
 </div>

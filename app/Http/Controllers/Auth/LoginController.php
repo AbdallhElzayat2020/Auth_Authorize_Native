@@ -21,8 +21,7 @@ class LoginController extends Controller
 
     public function handleLogin(LoginRequest $request)
     {
-
-
+        
         $user = User::whereEmail($request->identifier)
             ->orWhere('phone', $request->identifier)
             ->first();
