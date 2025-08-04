@@ -22,6 +22,7 @@ class LoginController extends Controller
     public function handleLogin(LoginRequest $request)
     {
 
+
         $user = User::whereEmail($request->identifier)
             ->orWhere('phone', $request->identifier)
             ->first();
@@ -32,7 +33,7 @@ class LoginController extends Controller
 
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return redirect()->back()->with(['error' => 'Invalid credentials'])->withInput($request->only('email'));
+            return redirect()->back()->with(['error' => 'Invalid credentials'])->withInput($request->only('identifier'));
         }
 
         if (!$user->account_verified_at) {
@@ -44,12 +45,11 @@ class LoginController extends Controller
         }
 
 
-        Auth::login($user);
+        Auth::login($user, $request->filled('remember'));
         if ($user->logout_other_devices) {
             Auth::logoutOtherDevices($request->password);
         }
         return redirect()->intended(route('profile'))->with('success', 'Login successful');
-
     }
 
     public function logout()
@@ -58,9 +58,15 @@ class LoginController extends Controller
         return redirect()->route('login')->with('success', 'Logged out successfully!');
     }
 
-    public function logoutDevice(Request $request, Session $session): \Illuminate\Http\RedirectResponse
+    public function logoutDevice(Request $request, Session $session)
     {
         $session->delete();
+
+        // If the session is the current session, log out the user
+        if ($session->id === $request->session()->getId()) {
+            Auth::logout();
+        }
+
         return back()->with('success', 'Device logged out successfully');
     }
 }

@@ -18,6 +18,8 @@ class LoginRequest extends FormRequest
         return [
             'identifier' => ['required', 'max:100'],
             'password' => ['required', 'min:8', 'string', 'max:255'],
+            'remember' => ['nullable', 'in:on,off'],
+            // 'g-recaptcha-response' => 'required|captcha'
         ];
     }
 }

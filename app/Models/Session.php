@@ -11,6 +11,8 @@ class Session extends Model
 {
     protected $table = 'sessions';
     protected $primaryKey = false;
+    public $incrementing = false;
+
     protected $fillable = [
         'user_id',
         'ip_address',
@@ -42,5 +44,11 @@ class Session extends Model
 
     protected $hidden = ['payload'];
     protected $appends = ['is_this_device'];
+
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

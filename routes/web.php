@@ -18,6 +18,9 @@ Route::get('/', function () {
 
 Route::view('/', 'welcome');
 
+// Temporary route for testing profile without authentication
+Route::get('test-profile', [ProfileController::class, 'index'])->name('test-profile');
+
 
 Route::middleware('guest')->group(function () {
 
@@ -76,13 +79,13 @@ Route::middleware('guest')->group(function () {
 
 
 /* Profile Routes */
-Route::middleware(['auth', 'verified', 'auth.session'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
-//    Route::view('profile', 'auth.profile')->name('profile');
+    //    Route::view('profile', 'auth.profile')->name('profile');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('update-profile', [UpdateProfileController::class, 'updateProfile'])->name('update-profile');
     Route::post('change-password', [ChangePasswordController::class, 'changePassword'])->name('change-password');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-    Route::post('logout/{session}', [LoginController::class, 'logoutDevice'])->name('logout_device');
-
+    //    Route::post('logout/{session}', [LoginController::class, 'logoutDevice'])->name('logout-device');
+    Route::post('logout/{session}', [LoginController::class, 'logoutDevice'])->name('logout-device');
 });
