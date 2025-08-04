@@ -80,7 +80,6 @@ class VerifyAccountController extends Controller
             } catch (\Exception $exception) {
                 return back()->with('error', 'Failed to send OTP via WhatsApp. Please try again later.' . $exception->getMessage());
             }
-
         }
 
         return to_route('account-verify', $request->type === 'phone' ? $user->phone : $user->email)

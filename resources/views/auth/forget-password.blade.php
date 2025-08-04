@@ -24,13 +24,8 @@
             @csrf
             <div class="mb-4">
                 <label for="email" class="block text-gray-300">Email Address</label>
-                <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autocomplete="email"
-                        required
-                        class="w-full p-3 text-gray-100 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input id="email" name="email" type="email" autocomplete="email" required
+                       class="w-full p-3 text-gray-100 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('email')
                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                 @enderror

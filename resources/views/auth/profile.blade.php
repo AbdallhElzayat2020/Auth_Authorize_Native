@@ -75,6 +75,15 @@
                     <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <div class="flex items-center mb-4">
+                    <input type="checkbox" name="logout_other_devices" id="logout_other_devices" {{auth()->user()->logout_other_devices ? 'checked' : ''}}>
+                    <label for="logout_other_devices" class="block text-gray-300 ml-1">Logout from other devices when login</label>
+                    @error('logout_other_devices')
+                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Update Profile</button>
             </form>
         </div>

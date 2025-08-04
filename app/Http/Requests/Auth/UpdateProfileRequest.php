@@ -25,8 +25,17 @@ class UpdateProfileRequest extends FormRequest
 
         return [
             'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $id],
-            'phone' => ['required', 'max:255', 'regex:/^01[0125][0-9]{8}$/', 'unique:users,phone,' . $id],
+            'phone' => ['required', 'max:255', 'phone:AUTO', 'unique:users,phone,' . $id],
             'name' => ['required', 'string', 'max:255'],
+            'logout_other_devices' => 'nullable|in:on,off'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'phone.phone' => 'The phone number must be a valid phone number.',
+            'phone.unique' => 'The phone number has already been taken.',
         ];
     }
 }

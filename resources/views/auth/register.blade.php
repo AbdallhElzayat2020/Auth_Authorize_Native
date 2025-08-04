@@ -20,6 +20,7 @@
             <span class="text-red-500 text-sm mt-1">{{$message}}</span>
             @enderror
         </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label for="email" class="block mb-2 text-sm font-medium">Email</label>
@@ -29,6 +30,7 @@
                 <span class="text-red-500 text-sm mt-1">{{$message}}</span>
                 @enderror
             </div>
+
             <div>
                 <label for="phone" class="block mb-2 text-sm font-medium">Phone</label>
                 <input type="text" id="phone" name="phone" autocomplete="off" value="{{old('phone')}}"
@@ -37,6 +39,7 @@
                 <span class="text-red-500 text-sm mt-1">{{$message}}</span>
                 @enderror
             </div>
+
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>

@@ -42,7 +42,11 @@ class LoginController extends Controller
                 ->with('error', 'Please verify your email address before logging in. A verification email has been sent to your email address.');
         }
 
+
         Auth::login($user);
+        if ($user->logout_other_devices) {
+            Auth::logoutOtherDevices($request->password);
+        }
         return redirect()->intended(route('profile'))->with('success', 'Login successful');
 
     }

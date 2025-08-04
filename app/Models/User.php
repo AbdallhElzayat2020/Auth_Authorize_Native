@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'otp',
         'phone',
+        'logout_other_devices',
         'account_verified_at',
     ];
 
