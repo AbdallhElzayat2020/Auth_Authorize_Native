@@ -8,11 +8,14 @@ use App\Http\Requests\Admin\Roles\UpdateRoleRequest;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RolesController extends Controller
 {
     public function index()
     {
+        Gate::authorize('view-any', Role::class);
+
         $roles = Role::with('permissions')->get();
         $permissions = Permission::all();
         return view('admin.roles.index', compact('roles', 'permissions'));
@@ -20,6 +23,8 @@ class RolesController extends Controller
 
     public function store(CreateRoleRequest $request)
     {
+        Gate::authorize('view', Role::class);
+
         $role = Role::create($request->validated());
 
         // Sync permissions
@@ -32,6 +37,8 @@ class RolesController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role)
     {
+        Gate::authorize('update', $role);
+
         $role->update(['role' => $request->role]);
 
         // Sync permissions
@@ -46,6 +53,7 @@ class RolesController extends Controller
 
     public function destroy(Role $role)
     {
+        Gate::authorize('delete', $role);
         $role->delete();
         return back()->with('success', 'Role Deleted successfully.');
     }

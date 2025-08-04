@@ -51,7 +51,10 @@
                         @endforeach
                     </td>
                     <td class="p-3 border-b border-gray-700">
+                        @hasPermissionTo(\App\Enums\PermissionsEnum::CREATE_ROLE->value)
+
                         <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="openRoleModal({{$user->id}}, {{json_encode($user->roles->pluck('id'))}})">Change Role</button>
+                        @endhasPermissionTo
                     </td>
                 </tr>
             @endforeach
