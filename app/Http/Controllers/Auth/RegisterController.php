@@ -19,12 +19,12 @@ class RegisterController extends Controller
     }
 
     public function register(RegisterRequest $request): \Illuminate\Http\RedirectResponse
+
     {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'role' => $request->role,
             'password' => Hash::make($request->password),
             'otp' => random_int(100000, 999999),
         ]);

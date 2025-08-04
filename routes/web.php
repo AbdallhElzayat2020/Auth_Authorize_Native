@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -90,9 +92,12 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::post('logout/{session}', [LoginController::class, 'logoutDevice'])->name('logout-device');
 
 
-    Route::view('admin', 'pages.admin')->name('admin')->middleware('role:admin');
-    Route::view('student', 'pages.student')->name('student')->middleware('role:student');
-    Route::view('teacher', 'pages.teacher')->name('teacher')->middleware('role:teacher');
+    Route::view('admin', 'pages.admin')->name('admin')->middleware('role:Admin');
+    Route::view('student', 'pages.student')->name('student')->middleware('role:Student');
+    Route::view('teacher', 'pages.teacher')->name('teacher')->middleware('role:Teacher');
 
 
+    Route::resource('roles', RolesController::class);
+    Route::get('users', [UsersController::class, 'index'])->name('users.index');
+    Route::get('users/{user}/change-role', [UsersController::class, 'changeRole'])->name('users.change-role');
 });
