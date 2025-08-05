@@ -464,6 +464,45 @@ If you encounter any issues or have questions:
 - [ ] Two-factor authentication (2FA) support
 - [ ] API endpoints for mobile apps
 
----
+-![WhatsApp Image 2025-08-05 at 3 14 03 AM](https://github.com/user-attachments/assets/1a6c2ba7-7dc6-4d62-94d3-dfc2853a3469)
+
+![WhatsApp Image 2025-08-05 at 3 14 05 AM](https://github.com/user-attachments/assets/8d99cc53-a49f-4c93-8c17-fa1fd8841490)
+
+![WhatsApp Image 2025-08-05 at 3 14 09 AM](https://github.com/user-attachments/assets/f73ce425-c5cf-4e27-b735-76c87d355baa)
+
+![WhatsApp Image 2025-08-05 at 3 14 27 AM](https://github.com/user-attachments/assets/dbf47f63-350b-4efa-8fa2-908429c802f1)
+
+
+![WhatsApp Image 2025-08-05 at 3 14 19 AM](https://github.com/user-attachments/assets/d43170b6-761a-427c-bae6-44729d30224b)
+
+
+![WhatsApp Image 2025-08-05 at 3 14 48 AM](https://github.com/user-attachments/assets/0c08b746-4027-49b8-af3f-22a07b25f119)
+
+![WhatsApp Image 2025-08-05 at 3 14 59 AM](https://github.com/user-attachments/assets/2136b150-c3ac-4a78-b32d-041d17874604)
+
+![WhatsApp Image 2025-08-05 at 3 16 06 AM](https://github.com/user-attachments/assets/8d68cc28-ba39-4da1-ae84-39070366b7f4)
+
+![WhatsApp Image 2025-08-05 at 3 16 29 AM](https://github.com/user-attachments/assets/d363bb1a-32c6-4c6e-809d-2b5394836f35)
+
+
+![WhatsApp Image 2025-08-05 at 3 16 46 AM](https://github.com/user-attachments/assets/699f6e1d-9b4a-46b9-8ec3-6e18817f9b09)
+
+![WhatsApp Image 2025-08-05 at 3 16 57 AM](https://github.com/user-attachments/assets/2549e85d-6b2e-4f10-a966-3e1a43c7f810)
+
+
+![WhatsApp Image 2025-08-05 at 3 17 51 AM](https://github.com/user-attachments/assets/525ef5c9-b639-4fbf-85a3-2ab0ea933603)
+
+
+![WhatsApp Image 2025-08-05 at 3 18 17 AM](https://github.com/user-attachments/assets/ce9af638-e1b6-4af2-90bc-c94f638581f5)
+
+
+![WhatsApp Image 2025-08-05 at 3 18 32 AM](https://github.com/user-attachments/assets/262e1b9f-87b4-4ded-8217-c8acae9b7631)
+
+
+![WhatsApp Image 2025-08-05 at 3 18 50 AM](https://github.com/user-attachments/assets/0057bb75-64e4-4faf-8c14-19bd8faaafae)
+
+
+
+
 
 **This project is developed using Laravel 12 and PHP 8.3 By Abdallh Elzayat**
