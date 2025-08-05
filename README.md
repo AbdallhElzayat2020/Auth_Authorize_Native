@@ -7,6 +7,7 @@ This project is a comprehensive authentication and authorization system built on
 ## ✨ Key Features
 
 ### 🔐 Authentication System
+
 - Password-based login
 - Passwordless login (Magic Links)
 - Social media login (Google, Facebook, GitHub)
@@ -16,6 +17,7 @@ This project is a comprehensive authentication and authorization system built on
 - Logout from all devices
 
 ### 🛡️ Authorization System
+
 - Role Management
 - Permission Management
 - User-Role assignment
@@ -23,6 +25,7 @@ This project is a comprehensive authentication and authorization system built on
 - Advanced admin interface for permission management
 
 ### 👥 User Management
+
 - User listing and management
 - User role assignment
 - Profile management
@@ -109,6 +112,7 @@ auth_authorize_12/
 ### Main Tables
 
 #### 1. `users` - Users Table
+
 ```sql
 - id (Primary Key)
 - name
@@ -124,6 +128,7 @@ auth_authorize_12/
 ```
 
 #### 2. `roles` - Roles Table
+
 ```sql
 - id (Primary Key)
 - role (Unique)
@@ -132,6 +137,7 @@ auth_authorize_12/
 ```
 
 #### 3. `permissions` - Permissions Table
+
 ```sql
 - id (Primary Key)
 - name (Unique)
@@ -140,6 +146,7 @@ auth_authorize_12/
 ```
 
 #### 4. `role_user` - User-Role Relationship Table
+
 ```sql
 - role_id (Foreign Key)
 - user_id (Foreign Key)
@@ -148,6 +155,7 @@ auth_authorize_12/
 ```
 
 #### 5. `permission_role` - Permission-Role Relationship Table
+
 ```sql
 - permission_id (Foreign Key)
 - role_id (Foreign Key)
@@ -158,6 +166,7 @@ auth_authorize_12/
 ## 🔧 System Requirements
 
 ### Prerequisites
+
 - **PHP**: 8.2 or higher
 - **Composer**: 2.0 or higher
 - **Node.js**: 18 or higher
@@ -165,6 +174,7 @@ auth_authorize_12/
 - **Laravel**: 12.0
 
 ### Required Packages
+
 ```json
 {
     "php": "^8.2",
@@ -180,24 +190,28 @@ auth_authorize_12/
 ## 🚀 Installation & Setup
 
 ### 1. Clone the Project
+
 ```bash
 git clone <repository-url>
 cd auth_authorize_12
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 composer install
 npm install
 ```
 
 ### 3. Environment Setup
+
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
 ### 4. Database Configuration
+
 ```bash
 # Edit database settings in .env file
 DB_CONNECTION=mysql
@@ -209,21 +223,25 @@ DB_PASSWORD=your_password
 ```
 
 ### 5. Run Migrations
+
 ```bash
 php artisan migrate
 ```
 
 ### 6. Run Seeders (Optional)
+
 ```bash
 php artisan db:seed
 ```
 
 ### 7. Create Storage Link
+
 ```bash
 php artisan storage:link
 ```
 
 ### 8. Start the Application
+
 ```bash
 # Start the server
 php artisan serve
@@ -238,11 +256,13 @@ composer run dev
 ## 🔐 Social Authentication Setup
 
 ### Google OAuth Setup
+
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project
 3. Enable Google+ API
 4. Create OAuth 2.0 credentials
 5. Add credentials to `.env` file:
+
 ```env
 GOOGLE_CLIENT_ID=your_client_id
 GOOGLE_CLIENT_SECRET=your_client_secret
@@ -250,9 +270,11 @@ GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback
 ```
 
 ### Facebook OAuth Setup
+
 1. Go to [Facebook Developers](https://developers.facebook.com/)
 2. Create a new app
 3. Add credentials to `.env` file:
+
 ```env
 FACEBOOK_CLIENT_ID=your_client_id
 FACEBOOK_CLIENT_SECRET=your_client_secret
@@ -262,6 +284,7 @@ FACEBOOK_REDIRECT_URI=http://localhost:8000/auth/facebook/callback
 ## 📱 Available Permissions
 
 ### Role Permissions
+
 - `view_roles` - View roles list
 - `view_role` - View specific role
 - `create_role` - Create new role
@@ -269,11 +292,13 @@ FACEBOOK_REDIRECT_URI=http://localhost:8000/auth/facebook/callback
 - `delete_role` - Delete role
 
 ### User Permissions
+
 - `view_users` - View users list
 - `view_user` - View specific user
 - `change_user_roles` - Change user roles
 
 ### Page Permissions
+
 - `teacher_view` - Access teacher page
 - `student_view` - Access student page
 - `admin_view` - Access admin page
@@ -283,33 +308,39 @@ FACEBOOK_REDIRECT_URI=http://localhost:8000/auth/facebook/callback
 ### Role & Permission Management
 
 #### 1. Access Admin Interface
+
 ```
 http://localhost:8000/roles
 ```
 
 #### 2. Create New Role
+
 - Click "Add Role" button
 - Enter role name
 - Select required permissions
 - Click "Save"
 
 #### 3. Edit Existing Role
+
 - Click "Edit" button next to the role
 - Modify role name or permissions
 - Click "Update"
 
 #### 4. Delete Role
+
 - Click "Delete" button next to the role
 - Confirm deletion
 
 ### User Management
 
 #### 1. View Users
+
 ```
 http://localhost:8000/users
 ```
 
 #### 2. Change User Role
+
 - Click "Change Role" next to the user
 - Select new role
 - Click "Update"
@@ -317,19 +348,23 @@ http://localhost:8000/users
 ## 🔒 Security
 
 ### Used Middleware
+
 - `auth` - Authentication check
 - `role:Admin` - Role verification
 - `permission:view_roles` - Permission verification
 
 ### CSRF Protection
+
 All forms are protected against CSRF attacks using Laravel's built-in protection.
 
 ### Password Hashing
+
 Passwords are hashed using Laravel's Hash facade.
 
 ## 🧪 Testing
 
 ### Run Tests
+
 ```bash
 # Run all tests
 php artisan test
@@ -339,6 +374,7 @@ composer run test
 ```
 
 ### Run Specific Tests
+
 ```bash
 php artisan test --filter=UserTest
 ```
@@ -346,6 +382,7 @@ php artisan test --filter=UserTest
 ## 📧 Email Configuration
 
 ### SMTP Setup
+
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
@@ -358,6 +395,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 ### WhatsApp Setup (Optional)
+
 ```env
 WHATSAPP_API_KEY=your_whatsapp_api_key
 WHATSAPP_PHONE_NUMBER=your_whatsapp_number
@@ -366,6 +404,7 @@ WHATSAPP_PHONE_NUMBER=your_whatsapp_number
 ## 🚀 Deployment
 
 ### Production Setup
+
 ```bash
 # Optimize the application
 php artisan config:cache
@@ -380,6 +419,7 @@ php artisan storage:link
 ```
 
 ### Required Production Environment Variables
+
 ```env
 APP_ENV=production
 APP_DEBUG=false
@@ -401,6 +441,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ## 📞 Support
 
 If you encounter any issues or have questions:
+
 - Open a new Issue on GitHub
 - Check the documentation
 - Contact the development team
@@ -408,6 +449,7 @@ If you encounter any issues or have questions:
 ## 🔄 Updates
 
 ### Current Version: 1.0.0
+
 - Complete authentication system
 - Role and permission management
 - Modern admin interface
@@ -415,6 +457,7 @@ If you encounter any issues or have questions:
 - Passwordless login
 
 ### Planned Updates
+
 - [ ] Add more social authentication providers
 - [ ] Improve user interface
 - [ ] Add reports and statistics
@@ -423,4 +466,4 @@ If you encounter any issues or have questions:
 
 ---
 
-**This project is developed using Laravel 12 and PHP 8.3  By Abdallh Elzayat**
+**This project is developed using Laravel 12 and PHP 8.3 By Abdallh Elzayat**
